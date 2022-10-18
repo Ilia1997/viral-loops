@@ -1,6 +1,21 @@
 <script>
+  import { onMount } from 'svelte';
   import svelteLogo from './assets/svelte.svg'
   import Counter from './lib/Counter.svelte'
+  let name, email;
+  let campaign;
+  const onFormSubmit = async ()=>{
+    const res =  await campaign.identify({
+    firstname: name,
+    lastname: "",
+    email: email,
+  }, () => {
+      console.log("Registration completed");
+  });
+  }
+  onMount(()=>{
+    console.log(campaign)
+  })
 </script>
 
 <main>
@@ -25,7 +40,12 @@
   <p class="read-the-docs">
     Click on the Vite and Svelte logos to learn more
   </p>
-  <div data-vl-widget="embedForm"></div>
+  <form on:submit|preventDefault={onFormSubmit}>
+    <input type="text" placeholder="Enter your name" bind:value={name} required>
+    <input type="email" placeholder="Enter your email" bind:value={email} required>
+    <button type="submit">Submit</button>
+  </form>
+  <!-- <div data-vl-widget="embedForm"></div> -->
 </main>
 
 <style>
