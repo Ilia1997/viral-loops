@@ -3,8 +3,9 @@
   import svelteLogo from './assets/svelte.svg'
   import Counter from './lib/Counter.svelte'
   let name, email;
-  let campaign;
+
   const onFormSubmit = async ()=>{
+    // @ts-ignore
     const res =  await campaign.identify({
     firstname: name,
     lastname: "",
@@ -13,9 +14,6 @@
       console.log("Registration completed");
   });
   }
-  onMount(()=>{
-    console.log(campaign)
-  })
 </script>
 
 <main>
